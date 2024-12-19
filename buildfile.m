@@ -1,7 +1,6 @@
 function plan = buildfile
 plan = buildplan(localfunctions);
 plan.DefaultTasks = "test";
-plan("test").Dependencies = "check";
 end
 
 function checkTask(~)

@@ -1,0 +1,52 @@
+name: matlab
+
+env:
+  CTEST_NO_TESTS_ACTION: error
+  CMAKE_BUILD_PARALLEL_LEVEL: 4
+  CTEST_PARALLEL_LEVEL: 0
+
+on:
+  push:
+    paths:
+    - "**.m"
+    - "**.cmake"
+    - "**/CMakeLists.txt"
+    - ".github/workflows/ci.yml"
+
+# Engine can't start on CI runner Linux, but works on real Linux computer
+
+jobs:
+
+  unix:
+
+    strategy:
+      matrix:
+        os: [ubuntu-22.04]
+        matlab: [R2024b]
+
+    runs-on: ${{ matrix.os }}
+
+    env:
+      CC: gcc-10
+      CXX: g++-10
+      FC: gfortran-10
+
+    steps:
+
+    - name: Install MATLAB
+      timeout-minutes: 10
+      uses: matlab-actions/setup-matlab@v2
+      with:
+        release: ${{ matrix.matlab }}
+
+    - uses: actions/checkout@v4
+
+    - name: Lint task
+      uses: matlab-actions/run-build@v2
+      with:
+        tasks: check
+
+    - name: Test task
+      uses: matlab-actions/run-build@v2
+      with:
+        tasks: test
