@@ -1,7 +1,9 @@
 name: ci
 
 env:
-  CMAKE_BUILD_PARALLEL_LEVEL: 3
+  CMAKE_BUILD_PARALLEL_LEVEL: 4
+  CTEST_PARALLEL_LEVEL: 0
+  CTEST_NO_TESTS_ACTION: error
   CMAKE_BUILD_TYPE: Release
 
 on:
@@ -15,44 +17,14 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
       with:
-        python-version: 3.7
+        python-version: "3.10"
 
     - run: pip install .[tests,lint]
 
     - run: flake8
     - run: mypy
-
-    - run: pytest
-
-
-  macos:
-    needs: linux
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-
-    - run: pip install .[tests]
-
-    - run: pytest
-      env:
-        FC: gfortran-11
-
-
-  windows:
-    needs: linux
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-
-    - run: pip install .[tests]
 
     - run: pytest
