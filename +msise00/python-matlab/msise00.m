@@ -1,16 +1,14 @@
-function atmos = msise00(time, alt_km, glat, glon)
-%% call MSISE00 model from Matlab.
+%% MSISE00 call MSISE-00 model
 % https://www.scivision.dev/matlab-python-user-module-import/
-assert(~verLessThan('matlab', '9.5'), 'Matlab >= R2018b required')
 
-narginchk(4,4)
-validateattributes(alt_km, {'numeric'}, {'positive', 'vector'})
-validateattributes(glat, {'numeric'}, {'scalar'})
-validateattributes(glon, {'numeric'}, {'scalar'})
-
-if isnumeric(time) || isdatetime(time)
-  time = datestr(time, 30);
+function atmos = msise00(time, alt_km, glat, glon)
+arguments
+  time (1,1) datetime
+  alt_km (1,:) {mustBePositive}
+  glat (1,1)
+  glon (1,1)
 end
 
 atmos = py.msise00.run(time, alt_km, glat, glon);
+
 end
