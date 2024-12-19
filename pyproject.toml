@@ -40,9 +40,6 @@ plot = [
     "pymap3d"
 ]
 
-[project.scripts]
-msise00 = "msise00.__main__:cli"
-
 
 [tool.black]
 line-length = 100

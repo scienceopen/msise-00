@@ -140,28 +140,11 @@ def rungtd1d(
     if os.name == "nt":
         exe_name += ".exe"
 
-    # check inputs for error, especially unavailable indices
-    if not np.isfinite(glat).all():
-        raise ValueError("glat is not finite.")
-
-    if not np.isfinite(glon).all():
-        raise ValueError("glon is not finite.")
-
     f107s = indices["f107s"]
-    if not np.isfinite(f107s):
-        raise ValueError("f107s is not finite.")
-
-    f107s = indices["f107s"]
-    if not np.isfinite(f107s):
-        raise ValueError("f107s is not finite.")
 
     f107 = indices["f107"]
-    if not np.isfinite(f107):
-        raise ValueError("f107 is not finite.")
 
     Ap = indices["Ap"]
-    if not np.isfinite(Ap):
-        raise ValueError("Ap is not finite.")
 
     exe = importlib.resources.files(__package__) / exe_name
     if not exe.is_file():
@@ -184,10 +167,13 @@ def rungtd1d(
 
         logging.info(" ".join(cmd))
 
-        ret = subprocess.check_output(cmd, text=True)
+        ret = subprocess.run(cmd, capture_output=True, text=True)
+        if ret.returncode != 0:
+            logging.error(ret.stderr)
+            return xarray.Dataset()
 
         # different compilers throw in extra \n
-        raw = list(map(float, ret.split()))
+        raw = list(map(float, ret.stdout.split()))
         if not len(raw) == 9 + 2:
             raise ValueError(ret)
         dens[i, :] = raw[:9]

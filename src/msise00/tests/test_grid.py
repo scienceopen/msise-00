@@ -6,6 +6,7 @@ python -m msise00 -w src/msise00/tests/ref3.nc -a 200 -gs 30 60 -t 2017-03-01T12
 
 import subprocess
 import pytest
+import sys
 import xarray
 import xarray.testing
 import importlib.resources
@@ -39,7 +40,7 @@ def test_script(tmp_path):
         ref = xarray.open_dataset(fn)
 
     fn = tmp_path / "test.nc"
-    cmd = ["msise00", "-q", "-w", str(fn), "-a", str(altkm), "-t", time, "-gs", "30", "60"]
+    cmd = [sys.executable, "-m", "msise00", "-q", "-w", str(fn), "-a", str(altkm), "-t", time, "-gs", "30", "60"]
     print(" ".join(cmd))
     subprocess.check_call(cmd)
 
