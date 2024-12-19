@@ -11,9 +11,8 @@ on:
     - "**.m"
     - "**.cmake"
     - "**/CMakeLists.txt"
-    - ".github/workflows/ci.yml"
+    - ".github/workflows/ci-matlab.yml"
 
-# Engine can't start on CI runner Linux, but works on real Linux computer
 
 jobs:
 
@@ -21,15 +20,13 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-22.04]
+        os: [ubuntu-24.04, macos-latest]
         matlab: [R2024b]
 
     runs-on: ${{ matrix.os }}
 
     env:
-      CC: gcc-10
-      CXX: g++-10
-      FC: gfortran-10
+      FC: gfortran-14
 
     steps:
 
