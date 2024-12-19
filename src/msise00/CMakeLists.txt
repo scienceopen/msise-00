@@ -1,9 +1,8 @@
-cmake_minimum_required(VERSION 3.14...3.21)
+cmake_minimum_required(VERSION 3.19)
 
 project(msise00 LANGUAGES Fortran)
 
-include(CTest)
-
+enable_testing()
 
 add_library(msise00 OBJECT fortran/msise00_sub.f fortran/msise00_data.f)
 target_compile_options(msise00 PRIVATE $<$<Fortran_COMPILER_ID:GNU>:-std=legacy>)

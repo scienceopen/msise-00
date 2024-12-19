@@ -111,7 +111,7 @@ MSISE00 will **automatically compile** "build on run" on first run from Matlab a
 Optionally, verify Matlab is working by from the top `msise00/` directory in Terminal
 
 ```sh
-matlab -batch msise00.test_mod
+buildtool test
 ```
 
 ### Fortran
