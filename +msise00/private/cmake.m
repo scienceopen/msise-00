@@ -14,7 +14,7 @@ assert(system("cmake --version") == 0, 'CMake not found')
 
 cmd = "cmake -B" + build_dir + " -S" + src_dir;
 if ispc && isempty(getenv("CMAKE_GENERATOR"))
-  cmd = cmd + " -G MinGW Makefiles";
+  cmd = cmd + ' -G "MinGW Makefiles"';
 end
 
 assert(system(cmd) == 0, 'error building with CMake')
