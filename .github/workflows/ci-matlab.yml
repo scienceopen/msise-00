@@ -48,3 +48,37 @@ jobs:
       uses: matlab-actions/run-build@v2
       with:
         tasks: test
+
+
+  msys2:
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: >-
+          mingw-w64-ucrt-x86_64-gcc-fortran
+
+    - name: Put MSYS2_MinGW64 on PATH
+      run: echo "${{ runner.temp }}/msys64/ucrt64/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: Install MATLAB
+      timeout-minutes: 10
+      uses: matlab-actions/setup-matlab@v2
+      with:
+        release: R2024b
+        cache: true
+
+    - uses: actions/checkout@v4
+
+    - name: Lint task
+      uses: matlab-actions/run-build@v2
+      with:
+        tasks: check
+
+    - name: Test task
+      uses: matlab-actions/run-build@v2
+      with:
+        tasks: test

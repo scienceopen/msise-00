@@ -37,3 +37,24 @@ jobs:
     - run: mypy
 
     - run: pytest
+
+
+  msys2:
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: >-
+          mingw-w64-ucrt-x86_64-gcc-fortran
+
+    - name: Put MSYS2_MinGW64 on PATH
+      run: echo "${{ runner.temp }}/msys64/ucrt64/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - uses: actions/checkout@v4
+
+    - run: pip install .[tests,lint]
+
+    - run: pytest
