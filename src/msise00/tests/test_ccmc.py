@@ -1,6 +1,7 @@
 """
 compare with CCMC web service output
 """
+
 from datetime import datetime
 import numpy as np
 from pytest import approx
