@@ -46,3 +46,9 @@ msise00 = "msise00.__main__:cli"
 
 [tool.black]
 line-length = 100
+
+[tool.mypy]
+files = ["src/"]
+
+ignore_missing_imports = true
+allow_redefinition = true

@@ -49,11 +49,11 @@ def build():
 
 def run(
     time: datetime,
-    altkm: float,
-    glat: float,
-    glon: float,
-    indices: dict[str, T.Any] = None,
-) -> xarray.Dataset:
+    altkm,
+    glat,
+    glon,
+    indices: dict[str, T.Any] | None = None,
+):
     """
     loops the rungtd1d function below. Figure it's easier to troubleshoot in Python than Fortran.
     """
@@ -71,11 +71,11 @@ def run(
 
 def loopalt_gtd(
     time: datetime,
-    glat: float | np.ndarray,
-    glon: float | np.ndarray,
-    altkm: float,
-    indices: dict[str, T.Any] = None,
-) -> xarray.Dataset:
+    glat,
+    glon,
+    altkm,
+    indices: dict[str, T.Any] | None = None,
+):
     """
     loop over location and time
 
@@ -108,8 +108,8 @@ def loopalt_gtd(
 
 
 def rungtd1d(
-    time: datetime, altkm: float, glat: float, glon: float, indices: dict[str, T.Any] = None
-) -> xarray.Dataset:
+    time: datetime, altkm: float, glat: float, glon: float, indices: dict[str, T.Any] | None = None
+):
     """
     This is the "atomic" function looped by other functions
     """

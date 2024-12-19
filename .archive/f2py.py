@@ -1,10 +1,11 @@
+from __future__ import annotations
+
 import numpy as np
 import xarray
+from datetime import datetime
 
 
-def rungtd1d(
-    time: Union[datetime, str, np.ndarray], altkm: np.ndarray, glat: float, glon: float
-) -> xarray.Dataset:
+def rungtd1d(time: datetime | str, altkm, glat: float, glon: float) -> xarray.Dataset:
     """
     This is the "atomic" function looped by other functions
     """

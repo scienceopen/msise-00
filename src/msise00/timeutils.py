@@ -5,7 +5,7 @@ import numpy as np
 from datetime import datetime, date
 
 
-def todt64(time: str | datetime | np.datetime64) -> np.ndarray:
+def todt64(time: str | datetime):
     dtime = np.atleast_1d(todatetime(time))  # type: ignore
 
     if dtime.size == 1:
@@ -19,7 +19,7 @@ def todt64(time: str | datetime | np.datetime64) -> np.ndarray:
     return dtime
 
 
-def todatetime(time: str | datetime | np.datetime64) -> datetime:
+def todatetime(time: str | datetime) -> datetime:
 
     if isinstance(time, str):
         dtime: datetime = parse(time)
