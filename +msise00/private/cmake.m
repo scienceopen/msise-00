@@ -13,7 +13,7 @@ fix_macos()
 assert(system("cmake --version") == 0, 'CMake not found')
 
 cmd = "cmake -B" + build_dir + " -S" + src_dir;
-if ispc && isempty(getenv("CMAKE_GENERATOR"))
+if ispc && ~isenv("CMAKE_GENERATOR")
   cmd = cmd + ' -G "MinGW Makefiles"';
 end
 
