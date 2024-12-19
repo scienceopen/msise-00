@@ -35,6 +35,7 @@ jobs:
       uses: matlab-actions/setup-matlab@v2
       with:
         release: ${{ matrix.matlab }}
+        cache: true
 
     - uses: actions/checkout@v4
 
