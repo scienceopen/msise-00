@@ -7,7 +7,7 @@ python -m msise00 -w src/msise00/tests/ref3.nc -a 200 -gs 30 60 -t 2017-03-01T12
 import subprocess
 import pytest
 import xarray
-import xarray.tests
+import xarray.testing
 import importlib.resources
 
 import msise00
@@ -29,7 +29,7 @@ def test_one_alt_one_time():
         dat_mod = msise00.run(time, altkm, lat, lon).squeeze()
     except ConnectionError:
         pytest.skip("unable to download RecentIndices.txt")
-    xarray.tests.assert_allclose(ref, dat_mod)
+    xarray.testing.assert_allclose(ref, dat_mod)
 
 
 def test_script(tmp_path):
@@ -44,4 +44,4 @@ def test_script(tmp_path):
     subprocess.check_call(cmd)
 
     dat = xarray.open_dataset(fn)
-    xarray.tests.assert_allclose(ref, dat)
+    xarray.testing.assert_allclose(ref, dat)

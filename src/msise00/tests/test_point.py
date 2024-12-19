@@ -9,7 +9,7 @@ import importlib.resources
 import subprocess
 import pytest
 import xarray
-import xarray.tests
+import xarray.testing
 import msise00
 import msise00.worldgrid
 
@@ -29,7 +29,7 @@ def test_one_loc_one_time(altkm, reffn):
         dat_mod = msise00.run(time, altkm, lat, lon).squeeze()
     except ConnectionError:
         pytest.skip("unable to download RecentIndices.txt")
-    xarray.tests.assert_allclose(ref, dat_mod)
+    xarray.testing.assert_allclose(ref, dat_mod)
 
 
 @pytest.mark.parametrize("altkm,reffn", [(100.0, "ref5.nc"), (200.0, "ref6.nc")])
@@ -45,4 +45,4 @@ def test_script(altkm, reffn, tmp_path):
     subprocess.check_call(cmd)
 
     dat = xarray.open_dataset(fn)
-    xarray.tests.assert_allclose(ref, dat)
+    xarray.testing.assert_allclose(ref, dat)
