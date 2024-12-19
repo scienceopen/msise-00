@@ -1,7 +1,8 @@
 # MSISE-00 in Python and Matlab
 
 [![Zenodo DOI](https://zenodo.org/badge/32971905.svg)](https://zenodo.org/badge/latestdoi/32971905)
-![Actions Status](https://github.com/space-physics/msise00/workflows/ci/badge.svg)
+[![python](https://github.com/space-physics/msise00/actions/workflows/ci.yml/badge.svg)](https://github.com/space-physics/msise00/actions/workflows/ci.yml)
+[![matlab](https://github.com/space-physics/msise00/actions/workflows/ci-matlab.yml/badge.svg)](https://github.com/space-physics/msise00/actions/workflows/ci-matlab.yml)
 [![PyPi Download stats](http://pepy.tech/badge/msise00)](http://pepy.tech/project/msise00)
 
 NRL MSISE-00 atmospheric model for Python.
